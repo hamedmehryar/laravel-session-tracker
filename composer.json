@@ -1,0 +1,21 @@
+{
+    "name": "hamedmehryar/laravel-session-tracker",
+    "description": "This package provides session tracking functionalities, multisession management and user device management features for laravel applications.",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/config": "~5.0",
+        "illuminate/support": "~5.0",
+        "illuminate/database": "~5.0",
+        "nesbot/carbon": "~1.0",
+        "illuminate/cookie": "~5.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hamed Mehryar",
+            "email": "hamed@netlinks.af"
+        }
+    ],
+    "minimum-stability": "stable"
+}
