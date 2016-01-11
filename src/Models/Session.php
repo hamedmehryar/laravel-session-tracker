@@ -10,7 +10,7 @@ class Session extends Model {
 
     protected $table = 'sessiontracker_sessions';
 
-    protected $fillable = ['user_id','browser','browser_version','platform','platform_version','mobile','device','robot', 'ip','last_activity'];
+    protected $fillable = ['user_id','browser','browser_version','platform','platform_version','mobile','device','robot','device_uid', 'ip','last_activity'];
 
     const STATUS_DEFAULT = NULL;
     const STATUS_BLOCKED = 1;
@@ -43,6 +43,7 @@ class Session extends Model {
             "device" => Agent::device(),
             "location" => $location,
             "robot" => Agent::isRobot(),
+            "device_uid" => \Illuminate\Support\Facades\Session::get('d_i', NULL),
             'ip'      => $_SERVER['REMOTE_ADDR'],
             'last_activity'=> Carbon::now()
         ]);
