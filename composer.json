@@ -17,10 +17,5 @@
             "email": "hamed@netlinks.af"
         }
     ],
-    "autoload": {
-        "psr-0": {
-            "Hamedmehryar\\": "src/"
-        }
-    },
     "minimum-stability": "stable"
 }
