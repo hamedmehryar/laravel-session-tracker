@@ -2,6 +2,7 @@
 
 use Hamedmehryar\SessionTracker\Models\Device;
 use Hamedmehryar\SessionTracker\Models\Session;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
  * This class is the main entry point of SessionTracker. Usually this the interaction
@@ -74,7 +75,7 @@ class SessionTracker
      * @param null $user
      * @return bool
      */
-    public function isInactive($user = null){
+    public function isSessionInactive($user = null){
         return Session::isInactive($user);
     }
 
@@ -86,6 +87,14 @@ class SessionTracker
         return Session::blockById($sessionId);
     }
 
+    public function sessionRequests($sessionId){
+        try {
+            $session = Session::findOrFail($sessionId);
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
+        return $session->requests;
+    }
     /**
      * @return bool
      */
