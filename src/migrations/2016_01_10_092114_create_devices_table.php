@@ -12,7 +12,7 @@ class CreateDevicesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('devices', function(Blueprint $table)
+		Schema::create('sessiontracker_devices', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->timestamps();
@@ -31,7 +31,7 @@ class CreateDevicesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('devices');
+		Schema::drop('sessiontracker_devices');
 	}
 
 }

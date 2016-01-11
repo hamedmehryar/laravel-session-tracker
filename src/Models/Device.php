@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Cookie;
 
 class Device extends Model {
 
+    protected $table = 'sessiontracker_devices';
+
     protected $fillable = ['user_id','browser','platform','device'];
 
     public static function isUserDevice(){

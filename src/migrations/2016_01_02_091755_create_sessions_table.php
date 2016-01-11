@@ -12,7 +12,7 @@ class CreateSessionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sessions', function(Blueprint $table)
+		Schema::create('sessiontracker_sessions', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->timestamps();
@@ -38,7 +38,7 @@ class CreateSessionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sessions');
+		Schema::drop('sessiontracker_sessions');
 	}
 
 }

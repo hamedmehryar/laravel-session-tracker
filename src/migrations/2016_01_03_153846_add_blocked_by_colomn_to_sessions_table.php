@@ -12,7 +12,7 @@ class AddBlockedByColomnToSessionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('sessions', function(Blueprint $table)
+		Schema::table('sessiontracker_sessions', function(Blueprint $table)
 		{
 			$table->integer('blocked_by')->nullable();
 		});

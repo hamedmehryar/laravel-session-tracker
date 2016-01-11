@@ -12,7 +12,7 @@ class CreateSessionRequestsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('session_requests', function(Blueprint $table)
+		Schema::create('sessiontracker_session_requests', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('session_id')->nullable();
@@ -33,7 +33,7 @@ class CreateSessionRequestsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('session_request');
+		Schema::drop('sessiontracker_session_request');
 	}
 
 }

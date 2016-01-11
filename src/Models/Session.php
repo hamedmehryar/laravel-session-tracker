@@ -8,6 +8,8 @@ use Jenssegers\Agent\Facades\Agent;
 
 class Session extends Model {
 
+    protected $table = 'sessiontracker_sessions';
+
     protected $fillable = ['user_id','browser','browser_version','platform','platform_version','mobile','device','robot', 'ip','last_activity'];
 
     const STATUS_DEFAULT = NULL;
