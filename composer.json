@@ -19,7 +19,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Hamedmehryar\\SessionTracker\\": "src/"
+            "Hamedmehryar\\": "src/"
         }
     },
     "minimum-stability": "stable"
