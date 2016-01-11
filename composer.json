@@ -17,5 +17,10 @@
             "email": "hamed@netlinks.af"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Hamedmehryar\\SessionTracker\\": "src/"
+        }
+    },
     "minimum-stability": "stable"
 }
