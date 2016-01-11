@@ -16,10 +16,7 @@ return [
 	|
 	*/
 
-	'ignore_log' => [
-		array('method'=>'get', 'route'=> 'notification/getEvents/{eventTime}'),
-		array('method'=>'get', 'route'=> 'notification/getEvents/{eventTime}')
-	],
+	'ignore_log' => [],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -36,9 +33,7 @@ return [
 	|
 	*/
 
-	'ignore_refresh' => [
-		array('method'=>'get', 'route'=> 'notification/getEvents/{eventTime}'),
-	],
+	'ignore_refresh' => [],
 
 	/*
 	|--------------------------------------------------------------------------
