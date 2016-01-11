@@ -1,9 +1,9 @@
 <?php namespace Hamedmehryar\SessionTracker\Middleware;
 
 use Closure;
+use Hamedmehryar\SessionTracker\SessionTrackerFacade;
 use \Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Config;
-use Hamedmehryar\SessionTracker\Models\Session;
 
 class SessionTracker {
 
@@ -46,7 +46,7 @@ class SessionTracker {
 				return redirect()->route(Config::get('sessionTracker.logout_route_name'));
 			}
 		}else{
-			if(Session::isBlocked() || Session::isInactive()){
+			if(SessionTrackerFacade::isSessionBlocked() || SessionTrackerFacade::isSessionInactive()){
 				if ($request->ajax())
 				{
 					return response('Unauthorized.', 401);
@@ -56,8 +56,8 @@ class SessionTracker {
 					return redirect()->route(Config::get('sessionTracker.logout_route_name'));
 				}
 			}
-			Session::refresh($request);
-			Session::log($request);
+			SessionTrackerFacade::refreshSession($request);
+			SessionTrackerFacade::logSession($request);
 		}
 		return $next($request);
 	}
