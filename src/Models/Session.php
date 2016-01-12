@@ -53,7 +53,7 @@ class Session extends Model {
         return $session;
     }
 
-    public static function end(){
+    public static function end($forgetSession){
         if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
@@ -62,9 +62,8 @@ class Session extends Model {
             }
             $session->end_date = Carbon::now();
             $session->save();
-            if(SessionTrackerFacade::forgotSession()){
+            if($forgetSession){
                 \Illuminate\Support\Facades\Session::forget('dbsession.id');
-                \Illuminate\Support\Facades\Session::forget('dbsession.forget');
             }
             return true;
         }

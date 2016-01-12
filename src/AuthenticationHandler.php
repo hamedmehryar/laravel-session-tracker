@@ -17,14 +17,6 @@ class AuthenticationHandler {
     }
 
     /**
-     * Handle user logout events.
-     */
-    public function onLogout($event)
-    {
-        SessionTrackerFacade::endSession();
-    }
-
-    /**
      * Register the listeners for the subscriber.
      *
      * @param  Illuminate\Events\Dispatcher  $events
@@ -33,7 +25,5 @@ class AuthenticationHandler {
     public function subscribe($events)
     {
         $events->listen('auth.login', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogin');
-
-        $events->listen('auth.logout', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogout');
     }
 }

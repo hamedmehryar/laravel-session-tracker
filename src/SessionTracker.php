@@ -41,11 +41,11 @@ class SessionTracker
     }
 
     /**
-     * @param bool $forgetSessionId
+     * @param bool $forgetSession
      * @return bool
      */
-    public function endSession(){
-        return Session::end();
+    public function endSession($forgetSession = false){
+        return Session::end($forgetSession);
     }
 
     /**
@@ -136,11 +136,7 @@ class SessionTracker
     }
 
     public function forgotSession(){
-        return \Illuminate\Support\Facades\Session::has('dbsession.forget');
-    }
-
-    public function forgetSession(){
-        \Illuminate\Support\Facades\Session::put('dbsession.forget', "true");
+        return ! \Illuminate\Support\Facades\Session::has('dbsession.id');
     }
 }
 
