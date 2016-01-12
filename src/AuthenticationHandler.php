@@ -32,8 +32,8 @@ class AuthenticationHandler {
      */
     public function subscribe($events)
     {
-        $events->listen('auth.login', 'AuthenticationHandler@onLogin');
+        $events->listen('auth.login', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogin');
 
-        $events->listen('auth.logout', 'AuthenticationHandler@onLogout');
+        $events->listen('auth.logout', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogout');
     }
 }

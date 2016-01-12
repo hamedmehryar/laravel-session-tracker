@@ -49,7 +49,7 @@ class SessionTrackerServiceProvider extends ServiceProvider {
 
 	private function registerAuthenticationEventHandler(){
 
-		Event::subscribe(new AuthenticationHandler());
+		Event::subscribe('Hamedmehryar\SessionTracker\AuthenticationHandler');
 	}
 
 }
