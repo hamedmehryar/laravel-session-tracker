@@ -44,8 +44,8 @@ class SessionTracker
      * @param bool $forgetSessionId
      * @return bool
      */
-    public function endSession($forgetSessionId = false){
-        return Session::end($forgetSessionId);
+    public function endSession(){
+        return Session::end();
     }
 
     /**
@@ -133,6 +133,14 @@ class SessionTracker
      */
     public function addUserDevice($uid, $browser, $platform, $device){
         return Device::addUserDevice($uid, $browser,$platform, $device);
+    }
+
+    public function forgotSession(){
+        return \Illuminate\Support\Facades\Session::has('dbsession.forget');
+    }
+
+    public function forgetSession(){
+        \Illuminate\Support\Facades\Session::put('dbsession.forget', "true");
     }
 }
 

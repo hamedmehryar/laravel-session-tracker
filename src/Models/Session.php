@@ -1,6 +1,7 @@
 <?php namespace Hamedmehryar\SessionTracker\Models;
 
 use Carbon\Carbon;
+use Hamedmehryar\SessionTracker\SessionTrackerFacade;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -52,7 +53,7 @@ class Session extends Model {
         return $session;
     }
 
-    public static function end($forgetSessionId){
+    public static function end(){
         if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
@@ -61,8 +62,10 @@ class Session extends Model {
             }
             $session->end_date = Carbon::now();
             $session->save();
-            if($forgetSessionId)
+            if(SessionTrackerFacade::forgotSession()){
                 \Illuminate\Support\Facades\Session::forget('dbsession.id');
+                \Illuminate\Support\Facades\Session::forget('dbsession.forget');
+            }
             return true;
         }
         return false;

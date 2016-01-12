@@ -1,5 +1,6 @@
 <?php namespace Hamedmehryar\SessionTracker;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class SessionTrackerServiceProvider extends ServiceProvider {
@@ -31,6 +32,7 @@ class SessionTrackerServiceProvider extends ServiceProvider {
 			base_path('vendor/hamedmehryar/laravel-session-tracker/src/config/config.php'), 'sessionTracker'
 		);
 		$this->registerSessionTracker();
+		$this->registerAuthenticationEventHandler();
 	}
 
 	/**
@@ -43,6 +45,11 @@ class SessionTrackerServiceProvider extends ServiceProvider {
 		$this->app->bind('sessionTracker', function ($app) {
 			return new SessionTracker($app);
 		});
+	}
+
+	private function registerAuthenticationEventHandler(){
+
+		Event::subscribe(new AuthenticationHandler());
 	}
 
 }

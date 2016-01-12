@@ -45,6 +45,8 @@ class SessionTracker {
 			{
 				return redirect()->route(Config::get('sessionTracker.logout_route_name'));
 			}
+			SessionTrackerFacade::forgetSession();
+			SessionTrackerFacade::endSession();
 		}else{
 			if(SessionTrackerFacade::isSessionBlocked() || SessionTrackerFacade::isSessionInactive()){
 				if ($request->ajax())
