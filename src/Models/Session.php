@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
 use Jenssegers\Agent\Facades\Agent;
 
 class Session extends Model {
@@ -43,7 +44,7 @@ class Session extends Model {
             "device" => Agent::device(),
             "location" => $location,
             "robot" => Agent::isRobot(),
-            "device_uid" => \Illuminate\Support\Facades\Session::get('d_i', NULL),
+            "device_uid" => Cookie::get('d_i', NULL),
             'ip'      => $_SERVER['REMOTE_ADDR'],
             'last_activity'=> Carbon::now()
         ]);
