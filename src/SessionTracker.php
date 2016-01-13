@@ -138,5 +138,15 @@ class SessionTracker
     public function forgotSession(){
         return ! \Illuminate\Support\Facades\Session::has('dbsession.id');
     }
+
+    public function sessionId(){
+        return \Illuminate\Support\Facades\Session::get('dbsession.id', NULL);
+    }
+
+    public function deleteSession(){
+
+        if($this->sessionId() != null)
+            Session::destroy($this->sessionId());
+    }
 }
 
