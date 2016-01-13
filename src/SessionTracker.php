@@ -145,8 +145,10 @@ class SessionTracker
 
     public function deleteSession(){
 
-        if($this->sessionId() != null)
+        if($this->sessionId() != null){
             Session::destroy($this->sessionId());
+            \Illuminate\Support\Facades\Session::forget('dbsession.id');
+        }
     }
 }
 
