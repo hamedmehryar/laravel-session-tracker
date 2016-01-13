@@ -103,6 +103,13 @@ class SessionTracker
     }
 
     /**
+     * @return bool
+     */
+    public function isSessionLocked(){
+        return Session::isLocked();
+    }
+
+    /**
      * @return int|null
      */
     public function lockSessionByCode(){
