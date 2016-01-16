@@ -298,7 +298,7 @@ class Session extends Model {
                 \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return -1;
             }
-            if(strtotime($session->created_at) - time() > Config::get('sessionTracker.security_code_lifetime', 1200)){
+            if(time() - strtotime($session->created_at) > Config::get('sessionTracker.security_code_lifetime', 1200)){
                 return -2;
             }else{
                 if(md5($code) == $session->login_code){
