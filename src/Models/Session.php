@@ -58,6 +58,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return false;
             }
             $session->end_date = Carbon::now();
@@ -75,6 +76,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return false;
             }
             $session->last_activity = Carbon::now();
@@ -94,6 +96,7 @@ class Session extends Model {
                     try {
                         $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
                     } catch (\Exception $e) {
+                        \Illuminate\Support\Facades\Session::forget('dbsession.id');
                         return false;
                     }
                     $session->last_activity = Carbon::now();
@@ -138,6 +141,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return null;
             }
             if($session->requests()->count() > 0){
@@ -163,6 +167,7 @@ class Session extends Model {
                 try {
                     $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
                 } catch (\Exception $e) {
+                    \Illuminate\Support\Facades\Session::forget('dbsession.id');
                     return false;
                 }
                 if($session->last_activity != null && abs(strtotime($session->last_activity)-(strtotime(date('Y-m-d H:i:s')))) > 1200){
@@ -197,6 +202,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return true;
             }
             if($session->block == self::STATUS_BLOCKED){
@@ -215,6 +221,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return true;
             }
             if($session->login_code != null){
@@ -232,6 +239,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return null;
             }
             return $session->login_code;
@@ -246,6 +254,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return NULL;
             }
             $code = rand(100000, 999999);
@@ -262,6 +271,7 @@ class Session extends Model {
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
                 return false;
             }
             if(md5($code) == $session->login_code){
