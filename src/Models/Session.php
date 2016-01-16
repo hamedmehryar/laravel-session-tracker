@@ -23,14 +23,18 @@ class Session extends Model {
 
     public static function start(){
         $locationJson = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-        $locationData = json_decode($locationJson);
-        if($locationData!= null){
-            $location = "";
-            if($locationData->city != "" && $locationData->city != null){
-                $location .= $locationData->city.", ";
-            }
-            if($locationData->country_name != "" && $locationData->country_name != null){
-                $location .= $locationData->country_name;
+        if($locationJson){
+            $locationData = json_decode($locationJson);
+            if($locationData!= null){
+                $location = "";
+                if($locationData->city != "" && $locationData->city != null){
+                    $location .= $locationData->city.", ";
+                }
+                if($locationData->country_name != "" && $locationData->country_name != null){
+                    $location .= $locationData->country_name;
+                }
+            }else{
+                $location = null;
             }
         }else{
             $location = null;
