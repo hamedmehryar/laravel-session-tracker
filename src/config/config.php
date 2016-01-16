@@ -85,6 +85,18 @@ return [
 	|
 	*/
 
-	'login_code_route_name' => 'app.loginCode',
+	'security_code_route_name' => 'app.securityCode',
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Security Code lifetime seconds
+	|--------------------------------------------------------------------------
+	|
+	| This option allows you to easily specify the period of time in seconds that
+	| the security code of the sessions is considered as expired.
+	|
+	*/
+	'security_code_lifetime' => 1200,
 
 ];

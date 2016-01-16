@@ -266,21 +266,45 @@ class Session extends Model {
         return NULL;
     }
 
+
+    public static function refreshCode(){
+        if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
+            try {
+                $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Session::forget('dbsession.id');
+                return NULL;
+            }
+            $code = rand(100000, 999999);
+            $session->login_code = md5($code);
+            $session->created_at = Carbon::now();
+            $session->save();
+            return $code;
+
+        }
+        return NULL;
+    }
+
+
     public static function unlockByCode($code){
         if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
             try {
                 $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
             } catch (\Exception $e) {
                 \Illuminate\Support\Facades\Session::forget('dbsession.id');
-                return false;
+                return -1;
             }
-            if(md5($code) == $session->login_code){
-                $session->login_code = NULL;
-                $session->save();
-                return true;
+            if(strtotime($session->created_at) - time() > Config::get('sessionTracker.security_code_lifetime', 1200)){
+                return -2;
+            }else{
+                if(md5($code) == $session->login_code){
+                    $session->login_code = NULL;
+                    $session->save();
+                    return 0;
+                }
             }
 
         }
-        return false;
+        return -1;
     }
 }

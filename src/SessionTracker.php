@@ -158,8 +158,12 @@ class SessionTracker
         }
     }
 
-    public function loginCode(){
+    public function securityCode(){
         return Session::loginCode();
+    }
+
+    public function refreshSecurityCode(){
+        return Session::refreshCode();
     }
 }
 

@@ -58,7 +58,7 @@ class SessionTracker {
 				}
 			}
 			elseif(SessionTrackerFacade::isSessionLocked()){
-				return redirect()->route(Config::get('sessionTracker.login_code_route_name'));
+				return redirect()->route(Config::get('sessionTracker.security_code_route_name'));
 			}
 			SessionTrackerFacade::refreshSession($request);
 			SessionTrackerFacade::logSession($request);
