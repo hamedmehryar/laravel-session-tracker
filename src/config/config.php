@@ -6,7 +6,7 @@ return [
 	|--------------------------------------------------------------------------
 	| Ignore routes for logging
 	|--------------------------------------------------------------------------
-	| This option specifies the routes which the Session Pal must not create
+	| This option specifies the routes which the Session Tracker must not create
 	| the log for them.
 	| The format is:
 	| 'ignore_log' => [
@@ -53,7 +53,7 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| This option allows you to easily specify the route name for login form.
-	| Session Pal uses this config item to redirect the request to login page.
+	| Session Tracker uses this config item to redirect the request to login page.
 	| Note: Your login route must have a name.
 	|
 	*/
@@ -66,11 +66,25 @@ return [
 	|--------------------------------------------------------------------------
 	|
 	| This option allows you to easily specify the route name for logout form.
-	| Session Pal uses this config item to redirect the request to login page.
+	| Session Tracker uses this config item to redirect the request to login page.
 	| Note: Your logout route must have a name.
 	|
 	*/
 
 	'logout_route_name' => 'app.logout',
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Login Code route name
+	|--------------------------------------------------------------------------
+	|
+	| This option allows you to easily specify the route name for login code page.
+	| Session Tracker uses this config item to redirect the request to login page.
+	| Note: Your login code route must have a name.
+	|
+	*/
+
+	'login_code_route_name' => 'app.loginCode',
 
 ];

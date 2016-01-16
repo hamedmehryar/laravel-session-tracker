@@ -8,7 +8,8 @@
         "illuminate/support": "~5.0",
         "illuminate/database": "~5.0",
         "nesbot/carbon": "~1.0",
-        "illuminate/cookie": "~5.0"
+        "illuminate/cookie": "~5.0",
+        "jenssegers/agent": "^2.3"
     },
     "license": "MIT",
     "authors": [

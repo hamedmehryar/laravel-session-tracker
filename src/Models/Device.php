@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Jenssegers\Agent\Facades\Agent;
 
 class Device extends Model {
 
@@ -20,15 +21,15 @@ class Device extends Model {
         return false;
     }
 
-    public static function addUserDevice($uid, $browser, $platform, $device){
-        $device = self::create([
-            'user_id' => Auth::user()->id,
-            'uid' => $uid,
-            'browser' => $browser,
-            'platform'=> $platform,
-            'device' => $device
-        ]);
-        if($device){
+    public static function addUserDevice(){
+        if(Cookie::has('d_i')){
+             self::create([
+                'user_id' => Auth::user()->id,
+                'uid' => Cookie::get('d_i'),
+                'browser' => Agent::browser(),
+                'platform'=> Agent::platform(),
+                'device' => Agent::device()
+            ]);
             return true;
         }else{
             return false;

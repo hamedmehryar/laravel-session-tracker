@@ -138,8 +138,8 @@ class SessionTracker
      * @param $device
      * @return bool
      */
-    public function addUserDevice($uid, $browser, $platform, $device){
-        return Device::addUserDevice($uid, $browser,$platform, $device);
+    public function addUserDevice(){
+        return Device::addUserDevice();
     }
 
     public function forgotSession(){
@@ -156,6 +156,13 @@ class SessionTracker
             Session::destroy($this->sessionId());
             \Illuminate\Support\Facades\Session::forget('dbsession.id');
         }
+    }
+
+    public function loginCode(){
+        return Session::loginCode();
+    }
+    public function checkLoginCode($code){
+        return md5($code) == Session::loginCode();
     }
 }
 

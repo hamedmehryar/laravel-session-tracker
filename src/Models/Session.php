@@ -227,6 +227,19 @@ class Session extends Model {
 
     }
 
+    public static function loginCode(){
+        if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
+            try {
+                $session = self::findOrFail(\Illuminate\Support\Facades\Session::get('dbsession.id'));
+            } catch (\Exception $e) {
+                return null;
+            }
+            return $session->login_code;
+        }
+        return null;
+
+    }
+
 
     public static function lockByCode(){
         if(\Illuminate\Support\Facades\Session::has('dbsession.id')){
