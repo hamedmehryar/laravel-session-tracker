@@ -9,7 +9,7 @@ class Device extends Model {
 
     protected $table = 'sessiontracker_devices';
 
-    protected $fillable = ['user_id','browser','platform','device'];
+    protected $fillable = ['user_id','uid','browser','platform','device'];
 
     public static function isUserDevice(){
         if(Cookie::has('d_i')){
