@@ -161,8 +161,5 @@ class SessionTracker
     public function loginCode(){
         return Session::loginCode();
     }
-    public function checkLoginCode($code){
-        return md5($code) == Session::loginCode();
-    }
 }
 
