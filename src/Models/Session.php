@@ -18,7 +18,7 @@ class Session extends Model {
     const STATUS_BLOCKED = 1;
 
     public function requests(){
-        return $this->hasMany('Hamedmehryar\SessionTracker\Models\SessionRequest');
+        return $this->hasMany('Hamedmehryar\SessionTracker\Models\SessionRequest')->orderBy('id', 'desc');
     }
 
     public static function start(){
