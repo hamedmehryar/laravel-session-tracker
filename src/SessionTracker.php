@@ -131,6 +131,10 @@ class SessionTracker
         return Device::isUserDevice();
     }
 
+    public function deleteDevice($id){
+        return Device::destroy($id);
+    }
+
     /**
      * @param $uid
      * @param $browser
