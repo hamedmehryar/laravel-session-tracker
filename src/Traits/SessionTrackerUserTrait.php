@@ -7,7 +7,7 @@ use Hamedmehryar\SessionTracker\Models\Session as SessionTrack;
 trait SessionTrackerUserTrait{
 
     public function activeSessions($exceptSelf = false){
-        $query =  $this->sessions()->where('end_date', null)->where('block', SessionTrack::STATUS_DEFAULT);
+        $query =  $this->sessions()->where('end_date', null)->where('block', SessionTrack::STATUS_DEFAULT)->where('login_code', null);
         if($exceptSelf){
             if(Session::has('dbsession.id')){
                 $query->where('id', '!=', Session::get('dbsession.id'));
