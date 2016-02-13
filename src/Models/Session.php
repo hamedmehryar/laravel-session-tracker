@@ -22,8 +22,10 @@ class Session extends Model {
     }
 
     public static function start(){
-        $locationJson = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-        if($locationJson){
+        $locationJson = @file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
+        if($locationJson === false){
+            $location = null;
+        }else{
             $locationData = json_decode($locationJson);
             if($locationData!= null){
                 $location = "";
@@ -36,8 +38,6 @@ class Session extends Model {
             }else{
                 $location = null;
             }
-        }else{
-            $location = null;
         }
         $session =  self::create([
             'user_id' => Auth::user()->id,
