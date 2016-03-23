@@ -1,7 +1,7 @@
 <?php namespace Hamedmehryar\SessionTracker\Traits;
 
-
 use Illuminate\Support\Facades\Session;
+use Illuminate\Foundation\Application;
 use Hamedmehryar\SessionTracker\Models\Session as SessionTrack;
 
 trait SessionTrackerUserTrait{
@@ -29,6 +29,10 @@ trait SessionTrackerUserTrait{
     }
 
     public function devicesUids(){
-        return $this->devices()->lists('uid');
+        $query = $this->devices()->lists('uid');
+        if(! str_contains(Application::VERSION, '5.0')){
+            $query = $query->all();
+        }
+        return $query;
     }
 }
