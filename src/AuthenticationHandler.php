@@ -24,6 +24,6 @@ class AuthenticationHandler {
      */
     public function subscribe($events)
     {
-        $events->listen('auth.login', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogin');
+        $events->listen('Illuminate\Auth\Events\Login', 'Hamedmehryar\SessionTracker\AuthenticationHandler@onLogin');
     }
 }
