@@ -4,11 +4,8 @@
     "type": "library",
     "require": {
         "php": ">=5.4.0",
-        "illuminate/config": "~5.0",
-        "illuminate/support": "~5.0",
-        "illuminate/database": "~5.0",
+        "laravel/framework": "~5.0",
         "nesbot/carbon": "~1.0",
-        "illuminate/cookie": "~5.0",
         "jenssegers/agent": "^2.3"
     },
     "license": "MIT",
