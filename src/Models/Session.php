@@ -22,23 +22,7 @@ class Session extends Model {
     }
 
     public static function start(){
-        $locationJson = @file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-        if($locationJson === false){
-            $location = null;
-        }else{
-            $locationData = json_decode($locationJson);
-            if($locationData!= null){
-                $location = "";
-                if($locationData->city != "" && $locationData->city != null){
-                    $location .= $locationData->city.", ";
-                }
-                if($locationData->country_name != "" && $locationData->country_name != null){
-                    $location .= $locationData->country_name;
-                }
-            }else{
-                $location = null;
-            }
-        }
+
         $session =  self::create([
             'user_id' => Auth::user()->id,
             "browser" => Agent::browser(),
@@ -47,7 +31,6 @@ class Session extends Model {
             "platform_version" => Agent::version(Agent::platform()),
             "mobile" => Agent::isMobile(),
             "device" => Agent::device(),
-            "location" => $location,
             "robot" => Agent::isRobot(),
             "device_uid" => Cookie::get('d_i', NULL),
             'ip'      => $_SERVER['REMOTE_ADDR'],
