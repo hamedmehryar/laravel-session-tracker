@@ -14,7 +14,7 @@ This package provides session tracking functionalities, multisession management 
 In composer.json:
 
     "require": {
-        "hamedmehryar/laravel-session-tracker" "0.0.0"
+        "hamedmehryar/laravel-session-tracker" "1.0.0"
     }
 
 Run:
