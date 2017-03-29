@@ -23,8 +23,14 @@ class Session extends Model {
 
     public static function start(){
 
+        $deviceId = Cookie::get('d_i', NULL);
+        $userId = Auth::user()->id;
+        $dateNow = Carbon::now();
+        if($deviceId){
+            self::where('device_uid', $deviceId)->where('user_id', $userId)->whereNull('end_date')->update(['end_date' => $dateNow]);
+        }
         $session =  self::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => $userId,
             "browser" => Agent::browser(),
             "browser_version" => Agent::version(Agent::browser()),
             "platform" => Agent::platform(),
@@ -32,9 +38,9 @@ class Session extends Model {
             "mobile" => Agent::isMobile(),
             "device" => Agent::device(),
             "robot" => Agent::isRobot(),
-            "device_uid" => Cookie::get('d_i', NULL),
+            "device_uid" => $deviceId,
             'ip'      => $_SERVER['REMOTE_ADDR'],
-            'last_activity'=> Carbon::now()
+            'last_activity'=> $dateNow
         ]);
         \Illuminate\Support\Facades\Session::put('dbsession.id', $session->id);
         return $session;
