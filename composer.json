@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=5.4.0",
-        "laravel/framework": "~5.0",
+        "laravel/framework": ">5.0",
         "nesbot/carbon": "~1.0",
         "jenssegers/agent": "^2.3"
     },
