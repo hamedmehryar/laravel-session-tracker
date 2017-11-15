@@ -25,7 +25,15 @@ class Session extends Model {
 
     public static function start(){
 
-	    $agent = new Agent();
+	$deviceId = Cookie::get('d_i', NULL);
+        $userId = Auth::user()->id;
+        $dateNow = Carbon::now();
+        if($deviceId){
+            self::where('device_uid', $deviceId)->where('user_id', $userId)->whereNull('end_date')->update(['end_date' => $dateNow]);
+        }
+	    
+	$agent = new Agent();
+	    
         $session =  self::create([
             'user_id' => Auth::user()->id,
             "browser" =>  $agent->browser(),
