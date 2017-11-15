@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Cookie;
-use Jenssegers\Agent\Facades\Agent;
+use Jenssegers\Agent\Agent;
 
 class Session extends Model {
 
+    
+	
     protected $table = 'sessiontracker_sessions';
 
     protected $fillable = ['user_id','browser','browser_version','platform','platform_version','mobile','device','robot','device_uid', 'ip','last_activity'];
@@ -23,26 +25,22 @@ class Session extends Model {
 
     public static function start(){
 
-        $deviceId = Cookie::get('d_i', NULL);
-        $userId = Auth::user()->id;
-        $dateNow = Carbon::now();
-        if($deviceId){
-            self::where('device_uid', $deviceId)->where('user_id', $userId)->whereNull('end_date')->update(['end_date' => $dateNow]);
-        }
+	    $agent = new Agent();
         $session =  self::create([
-            'user_id' => $userId,
-            "browser" => Agent::browser(),
-            "browser_version" => Agent::version(Agent::browser()),
-            "platform" => Agent::platform(),
-            "platform_version" => Agent::version(Agent::platform()),
-            "mobile" => Agent::isMobile(),
-            "device" => Agent::device(),
-            "robot" => Agent::isRobot(),
-            "device_uid" => $deviceId,
+            'user_id' => Auth::user()->id,
+            "browser" =>  $agent->browser(),
+            "browser_version" => $agent->version($agent->browser()),
+            "platform" => $agent->platform(),
+            "platform_version" => $agent->version($agent->platform()),
+            "mobile" => $agent->isMobile(),
+            "device" =>  $agent->device(),
+            "robot" => $agent->isRobot(),
+            "device_uid" => Cookie::get('d_i', NULL),
             'ip'      => $_SERVER['REMOTE_ADDR'],
-            'last_activity'=> $dateNow
+            'last_activity'=> Carbon::now()
         ]);
         \Illuminate\Support\Facades\Session::put('dbsession.id', $session->id);
+		
         return $session;
     }
 
@@ -80,7 +78,7 @@ class Session extends Model {
         return false;
     }
 
-    public static function refresh($request){
+    public static function refreshSes($request){
         foreach(Config::get('sessionTracker.ignore_refresh', array()) as $ignore){
             if(($request->route()->getName() == $ignore['route'] || $request->route()->getUri() == $ignore['route']) && $request->route()->methods()[0] == $ignore['method']){
                 break;
