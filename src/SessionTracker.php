@@ -60,7 +60,7 @@ class SessionTracker
      * @return bool
      */
     public function refreshSession($request){
-        return Session::refresh($request);
+        return Session::refreshSes($request);
     }
 
     /**
